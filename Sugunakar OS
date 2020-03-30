@@ -1,0 +1,81 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <pthread.h>
+#include <semaphore.h>
+int doeventopen();
+int doeventclose(int id);
+int doeventwait(int id);
+int doeventsig(int id);
+sem_t evnt[100];  
+sem_t count=0;
+
+
+int main(){
+    int n,i,c;
+    printf("how many eevent to be occured");
+    scanf("%d",&n);
+    for(i=0;i<n;i++){
+        doeventopen();
+    }
+    while(1){
+        printf("what opertion to be done \t 1.close 2.wait 3. signal");
+    scanf("%d",&c)
+    printf("enter id"):
+        scanf("%d",&id);
+        
+    switch(c){
+        case 1:doeventclose(id);
+        break;
+        case 2:doeventwait(id );
+        break;
+        case 3: doeventsig(id);
+        break;
+    }
+
+    }
+
+
+}
+int doeventopen(){
+    if(evnt[count]!=0)
+    {
+    evnt[count++]=1;
+    return 1;
+    }
+    else{
+        return -1;
+    }
+
+
+}
+int doeventclose(int id){
+    int i;
+    if(evnt[id]!=0){
+        evnt[id]=0;
+        return 1;
+    }
+    else{
+        return -1;
+    }
+}
+int doeventwait(int id){
+    int i;
+    while(evnt[id]!=0){
+        //critical section
+    }
+    else{
+        return -1;
+    }
+}
+int doeventsig(int id){
+    int i;
+    if(evnt[id]!=0){
+        doeventopen();
+        return 1;
+    }
+    else{
+        doeventclose(id);
+        return -1;
+    }
+}
